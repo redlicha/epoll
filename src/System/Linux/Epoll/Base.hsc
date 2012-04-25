@@ -6,7 +6,7 @@
 -- Maintainer  : toralf.wittner@gmail.com
 -- Stability   : experimental
 -- Portability : non-portable
--- 
+--
 -- Low level interface to Linux' epoll, a high performance polling mechanism
 -- which handles high numbers of file descriptors efficiently. See man epoll(7)
 -- for details.
@@ -46,7 +46,7 @@ module System.Linux.Epoll.Base (
 
 import Util
 import Foreign
-import Foreign.C.Types (CInt)
+import Foreign.C.Types (CInt (..))
 import Foreign.C.Error (throwErrnoIfMinus1,
                         throwErrnoIfMinus1_,
                         throwErrnoIfMinus1Retry)
@@ -149,7 +149,7 @@ create :: Size -> IO Device
 create s = do
     dev <- throwErrnoIfMinus1 "create: c_epoll_create" (c_epoll_create 1)
     buf <- mallocArray (fromIntegral $ fromSize s)
-    installHandler sigPIPE Ignore Nothing
+    _ <- installHandler sigPIPE Ignore Nothing
     return $ Device (Fd dev) buf s
 
 -- | Closes epoll device.
