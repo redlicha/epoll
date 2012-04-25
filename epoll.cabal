@@ -26,7 +26,8 @@ library
   ghc-options:      -Wall -O2
   extensions:       CPP,
                     ForeignFunctionInterface,
-                    TypeSynonymInstances
+                    TypeSynonymInstances,
+                    FlexibleInstances
   build-depends:    base >= 3 && < 5, unix
   hs-source-dirs:   src
 
