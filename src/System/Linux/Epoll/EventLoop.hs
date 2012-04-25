@@ -99,7 +99,7 @@ addCallback el fd emp = do
 -- that you must not call 'stopEventLoop' before invoking this function.
 removeCallback :: EventLoop -> Callback -> IO ()
 removeCallback el cb = do
-    doClose (elDevice el) (elGarbage el) (cbDesc cb) (cbData cb)
+    _ <- doClose (elDevice el) (elGarbage el) (cbDesc cb) (cbData cb)
     return ()
 
 -- | In case you use 'oneShotEvent' you can re-enable a callback after the event
